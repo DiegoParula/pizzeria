@@ -16,19 +16,19 @@ import lombok.Setter;
 public class CustomerEntity {
 
     @Id
-    @Column(nullable = false, columnDefinition = "VARCHAR(15)", name = "id_customer")
+    @Column(nullable = false, length = 15, name = "id_customer")
     private String idCustomer;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(60)")
+    @Column(nullable = false, length = 60)
     private String name;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(100)")
+    @Column(length = 100)
     private String address;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(50)", unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(20)", name = "phone_number")
+    @Column(length = 20, name = "phone_number")
     private String phoneNumber;
 }
 
