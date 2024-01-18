@@ -3,12 +3,15 @@ package com.parula.pizzeria.service;
 import com.parula.pizzeria.persistence.entity.PizzaEntity;
 import com.parula.pizzeria.persistence.repository.PizzaPagSort;
 import com.parula.pizzeria.persistence.repository.PizzaRepository;
+import com.parula.pizzeria.service.dto.UpdatePizzaPriceDto;
+import com.parula.pizzeria.service.exception.EmailApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -78,5 +81,15 @@ public class PizzaService {
         return this.pizzaRepository.existsById(idPizza);
     }
 
+    @Transactional(noRollbackFor = EmailApiException.class)//permite garantizar que se cumplan los principios de acid
 
+    public void updatePrice(UpdatePizzaPriceDto dto){
+
+        this.pizzaRepository.updatePrice(dto);
+        this.senEMail();
+    }
+
+    private void senEMail(){
+        throw new EmailApiException();
+    }
 }

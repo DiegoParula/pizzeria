@@ -43,6 +43,8 @@ public class OrderEntity {
     private CustomerEntity customer;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)//eager significa que cuadno tratemos de recuperar un order entity automaticamente tambien traiga esta relacion
+    @OrderBy("price DESC")
     private List<OrderItemEntity> items;
+
 
 }
