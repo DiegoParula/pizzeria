@@ -3,12 +3,10 @@ package com.parula.pizzeria.web.controller;
 import com.parula.pizzeria.persistence.entity.OrderEntity;
 import com.parula.pizzeria.persistence.projection.OrderSummary;
 import com.parula.pizzeria.service.OrderService;
+import com.parula.pizzeria.service.dto.RandomOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,5 +44,10 @@ public class OrderController {
     @GetMapping("/summary/{idOrder}")
     public ResponseEntity<OrderSummary> getSummary(@PathVariable int idOrder){
         return ResponseEntity.ok(this.orderService.getSummary(idOrder));
+    }
+
+    @PostMapping("/random")
+    public ResponseEntity<Boolean> randomOrder(@RequestBody RandomOrderDto dto){
+    return ResponseEntity.ok(this.orderService.saveRandomOrder(dto));
     }
 }
